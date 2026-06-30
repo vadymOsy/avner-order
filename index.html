@@ -207,10 +207,7 @@
             flex-direction: column;
             gap: 22px;
             justify-content: center;
-            opacity: 0;
-            animation: slideInRight 1.1s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
         }
-        body.rtl .hero-red { animation-name: slideInLeft; }
 
         .hero-red h1 {
             font-size: clamp(48px, 6.2vw, 84px);
@@ -365,24 +362,25 @@
             margin-top: 8px;
             padding: 9px 16px;
             background: var(--bg);
-            border: 1.5px solid var(--red);
+            border: 1.5px solid var(--ink);
             border-radius: 4px;
             font-family: inherit;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--red);
+            color: var(--ink);
             cursor: pointer;
             transition: all 0.15s;
         }
-        .optional-toggle:hover { background: rgba(237,28,36,0.06); }
+        .optional-toggle:hover { background: var(--surface); }
         .optional-toggle[aria-expanded="true"] {
-            background: var(--red);
+            background: var(--ink);
             color: #ffffff;
         }
         .toggle-chevron {
-            font-size: 10px;
+            font-size: 14px;
+            font-weight: 700;
             line-height: 1;
             transition: transform 0.25s ease;
             margin-top: 1px;
@@ -401,10 +399,8 @@
         .submit-row {
             margin-top: 36px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 16px;
         }
         .footer-note {
             font-size: 11px;
@@ -415,8 +411,9 @@
             line-height: 1.6;
         }
         .submit-btn {
-            padding: 18px 36px;
-            background: var(--red);
+            width: 100%;
+            padding: 20px 28px;
+            background: var(--ink);
             color: #ffffff;
             border: none;
             border-radius: 4px;
@@ -426,17 +423,15 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.15s, transform 0.15s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
         }
-        .submit-btn .arrow { font-size: 15px; }
+        .submit-btn .arrow {
+            font-size: 18px;
+            display: inline-block;
+        }
         body.rtl .submit-btn .arrow { transform: scaleX(-1); }
-        .submit-btn:hover:not(:disabled) {
-            background: var(--red-hover);
-            transform: translateY(-1px);
-        }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .error-msg {
@@ -527,12 +522,22 @@
             .hero-red { min-height: 300px; padding: 32px 24px; gap: 22px; }
             .form-section { padding: 48px 20px 80px; margin-top: 36px; }
             .form-heading { margin-bottom: 28px; }
-            .submit-row { flex-direction: column-reverse; align-items: stretch; }
-            .submit-btn { justify-content: center; }
             .success-screen { padding: 0 20px; margin: 48px auto; }
             .success-card { padding: 56px 28px; }
             footer.site-footer { padding: 22px 20px; gap: 24px; }
         }
+        /* ===== Hebrew type bump — Noto Sans Hebrew reads smaller at equal px ===== */
+        body.rtl .nav-link { font-size: 14px; }
+        body.rtl .lang-btn { font-size: 13px; }
+        body.rtl .hero-tag { font-size: 13px; }
+        body.rtl label { font-size: 13px; }
+        body.rtl .optional { font-size: 11px; }
+        body.rtl .optional-toggle { font-size: 13px; }
+        body.rtl .hint { font-size: 13px; }
+        body.rtl .footer-note { font-size: 12px; }
+        body.rtl .submit-btn { font-size: 15px; }
+        body.rtl .success-card p { font-size: 15px; }
+        body.rtl footer.site-footer { font-size: 13px; }
     </style>
 </head>
 <body>
