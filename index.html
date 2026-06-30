@@ -17,12 +17,9 @@
             --red-hover: #c8141b;
             --surface: #f4f4f4;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
         html, body { background: var(--bg); }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--ink);
@@ -36,7 +33,6 @@
         }
         img { display: block; max-width: 100%; }
         a { color: inherit; text-decoration: none; }
-
         /* ===== NAV ===== */
         nav {
             display: flex;
@@ -50,7 +46,6 @@
             background: rgba(255,255,255,0.92);
             backdrop-filter: blur(10px);
         }
-
         .nav-left {
             display: flex;
             align-items: center;
@@ -69,7 +64,6 @@
         }
         body.rtl .nav-avatar { animation-name: slideInRight; }
         .nav-avatar:hover { transform: scale(1.06); }
-
         .nav-logo {
             font-size: 18px;
             font-weight: 800;
@@ -79,13 +73,11 @@
             opacity: 0;
             animation: fadeIn 0.7s ease 0.1s forwards;
         }
-
         .nav-right {
             display: flex;
             align-items: center;
             gap: 28px;
         }
-
         .nav-link {
             font-size: 13px;
             font-weight: 700;
@@ -108,11 +100,11 @@
             margin-left: 0;
             margin-right: 3px;
         }
-
         /* Language switcher — minimal, no background */
         .lang-switcher {
             display: flex;
-            gap: 4px;
+            align-items: center;
+            gap: 8px;
             opacity: 0;
             animation: fadeIn 0.7s ease 0.3s forwards;
         }
@@ -131,8 +123,13 @@
         }
         .lang-btn.active { color: var(--ink); }
         .lang-btn:hover:not(.active) { color: var(--ink); }
-        .lang-divider { color: var(--gray); font-size: 12px; font-weight: 700; }
-
+        .lang-divider {
+            display: inline-block;
+            width: 1.5px;
+            height: 13px;
+            background: var(--gray);
+            transform: rotate(20deg);
+        }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideInLeft {
@@ -145,7 +142,6 @@
             60% { opacity: 0.6; filter: blur(1px); }
             100% { opacity: 1; transform: translateX(0); filter: blur(0); }
         }
-
         /* ===== HERO ===== */
         .hero {
             padding: 0 40px;
@@ -154,7 +150,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .hero-tag {
             display: inline-flex;
             align-items: center;
@@ -173,7 +168,6 @@
             background: #ffffff;
             border-radius: 50%;
         }
-
         /* Word rotator on its own line */
         .rotator {
             display: block;
@@ -195,7 +189,6 @@
             .rotator { transition: none; }
             .rotator.swap { opacity: 1; transform: none; filter: none; }
         }
-
         /* ===== Red CTA block (right side, mirrors portfolio) ===== */
         .hero-red {
             background: var(--red);
@@ -208,7 +201,6 @@
             gap: 22px;
             justify-content: center;
         }
-
         .hero-red h1 {
             font-size: clamp(48px, 6.2vw, 84px);
             font-weight: 900;
@@ -225,7 +217,6 @@
             text-decoration-thickness: 4px;
             text-underline-offset: 8px;
         }
-
         /* ===== FORM SECTION ===== */
         .form-section {
             padding: 72px 40px 100px;
@@ -245,16 +236,13 @@
             opacity: 0;
             animation: fadeUp 0.55s ease 0.6s forwards;
         }
-
         .form-grid {
             max-width: 720px;
             opacity: 0;
             animation: fadeUp 0.55s ease 0.7s forwards;
         }
-
         .form-group { margin-bottom: 22px; }
         .form-group:last-child { margin-bottom: 0; }
-
         label {
             display: block;
             font-size: 11px;
@@ -264,14 +252,6 @@
             color: var(--muted);
             margin-bottom: 10px;
         }
-        .optional {
-            font-weight: 500;
-            font-size: 10px;
-            color: var(--gray);
-            margin-left: 4px;
-        }
-        body.rtl .optional { margin-left: 0; margin-right: 4px; }
-
         input, textarea {
             width: 100%;
             padding: 16px 18px;
@@ -292,7 +272,6 @@
         }
         input::placeholder, textarea::placeholder { color: var(--gray); }
         textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
-
         /* Masked phone field */
         .phone-mask-wrap {
             position: relative;
@@ -345,7 +324,6 @@
         }
         .phone-input-real:focus { box-shadow: none !important; }
         .phone-input-real::selection { background: transparent; }
-
         .hint {
             margin-top: 10px;
             font-size: 12px;
@@ -353,7 +331,6 @@
             line-height: 1.5;
             font-weight: 500;
         }
-
         /* Optional toggle — red outline minimal button */
         .optional-toggle {
             display: inline-flex;
@@ -379,14 +356,15 @@
             color: #ffffff;
         }
         .toggle-chevron {
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 700;
             line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.25s ease;
-            margin-top: 1px;
         }
         .optional-toggle[aria-expanded="true"] .toggle-chevron { transform: rotate(180deg); }
-
         .optional-content {
             display: none;
             margin-top: 24px;
@@ -394,7 +372,6 @@
             border-top: 1px solid var(--border-soft);
         }
         .optional-content.open { display: block; animation: fadeUp 0.35s ease both; }
-
         /* Submit row */
         .submit-row {
             margin-top: 36px;
@@ -433,7 +410,6 @@
         }
         body.rtl .submit-btn .arrow { transform: scaleX(-1); }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
         .error-msg {
             display: none;
             margin-top: 16px;
@@ -448,7 +424,6 @@
             border-radius: 2px;
         }
         body.rtl .error-msg { border-left: none; border-right: 3px solid var(--red); }
-
         /* ===== Success ===== */
         .success-screen {
             display: none;
@@ -488,7 +463,6 @@
             line-height: 1.7;
             font-weight: 500;
         }
-
         /* ===== Footer ===== */
         footer.site-footer {
             border-top: 1px solid var(--border-soft);
@@ -504,12 +478,10 @@
         footer.site-footer a:hover { color: var(--red); }
         footer.site-footer .arrow { display: inline-block; margin-left: 4px; }
         body.rtl footer.site-footer .arrow { transform: scaleX(-1); margin-left: 0; margin-right: 4px; }
-
         /* ===== Mobile ===== */
         @media (max-width: 820px) {
             .hero-red { min-height: 360px; padding: 36px 28px; }
         }
-
         @media (max-width: 600px) {
             nav { padding: 18px 20px; }
             .nav-right { gap: 14px; }
@@ -532,7 +504,6 @@
         body.rtl .hero-tag { font-size: 16px; }
         body.rtl .hero-red h1 { font-size: clamp(56px, 7.2vw, 96px); }
         body.rtl label { font-size: 15px; }
-        body.rtl .optional { font-size: 13px; }
         body.rtl .optional-toggle { font-size: 15px; }
         body.rtl .hint { font-size: 15px; }
         body.rtl .footer-note { font-size: 14px; }
@@ -545,7 +516,6 @@
     </style>
 </head>
 <body>
-
 <nav>
     <div class="nav-left">
         <img src="avner.jpg" alt="Avner Assulin" class="nav-avatar" id="navAvatar">
@@ -556,14 +526,12 @@
         <a href="https://wa.me/972504848756" target="_blank" rel="noopener" class="nav-link" id="nav-whatsapp">WhatsApp <span class="arrow">↗</span></a>
         <div class="lang-switcher">
             <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <span class="lang-divider">/</span>
+            <span class="lang-divider" aria-hidden="true"></span>
             <button class="lang-btn" onclick="setLang('he')">HE</button>
         </div>
     </div>
 </nav>
-
 <div id="formWrapper">
-
     <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="hero-red">
@@ -571,13 +539,11 @@
             <h1 id="t-title"><span id="t-title-prefix">I do</span> <span class="rotator" id="rotator">filming</span></h1>
         </div>
     </section>
-
     <!-- ===== FORM ===== -->
     <section class="form-section">
         <div class="form-heading">
             <h2 id="t-form-heading">Start a project</h2>
         </div>
-
         <form id="orderForm" class="form-grid">
             <div class="form-group">
                 <label id="t-phone-label">Phone</label>
@@ -587,31 +553,28 @@
                 </div>
                 <p class="hint" id="t-phone-hint">A phone number is enough — but feel free to share a bit more.</p>
             </div>
-
             <button type="button" class="optional-toggle" id="optionalToggle" aria-expanded="false">
                 <span id="t-toggle-text">Add more details</span>
                 <span class="toggle-chevron" aria-hidden="true">▾</span>
             </button>
-
             <div class="optional-content" id="optionalContent">
                 <div class="form-group">
-                    <label id="t-name-label">Name <span class="optional">(optional)</span></label>
+                    <label id="t-name-label">Name</label>
                     <input type="text" id="name">
                 </div>
                 <div class="form-group">
-                    <label id="t-business-label">Business name <span class="optional">(optional)</span></label>
+                    <label id="t-business-label">Business name</label>
                     <input type="text" id="business">
                 </div>
                 <div class="form-group">
-                    <label id="t-email-label">Email <span class="optional">(optional)</span></label>
+                    <label id="t-email-label">Email</label>
                     <input type="email" id="email">
                 </div>
                 <div class="form-group">
-                    <label id="t-comment-label">Comment <span class="optional">(optional)</span></label>
+                    <label id="t-comment-label">Comment</label>
                     <textarea id="description"></textarea>
                 </div>
             </div>
-
             <div class="submit-row">
                 <p class="footer-note" id="t-footer-note">No spam. No pressure.</p>
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -619,12 +582,10 @@
                     <span class="arrow">→</span>
                 </button>
             </div>
-
             <div class="error-msg" id="errorMsg"></div>
         </form>
     </section>
 </div>
-
 <div class="success-screen" id="successScreen">
     <div class="success-card">
         <div class="success-icon">✓</div>
@@ -632,16 +593,13 @@
         <p id="t-success-text">Thanks. I'll review your details<br>and reach out as soon as I can.</p>
     </div>
 </div>
-
 <footer class="site-footer">
     <a href="https://instagram.com/avner_assulin" target="_blank" rel="noopener" id="t-instagram">Instagram <span class="arrow">↗</span></a>
     <a href="https://atar.design/" target="_blank" rel="noopener" id="t-made-by">Made by Atar <span class="arrow">↗</span></a>
 </footer>
-
 <script>
     /* Set WEBHOOK_URL to enable form submission to n8n */
     const WEBHOOK_URL = '';
-
     const translations = {
         en: {
             dir: 'ltr',
@@ -658,7 +616,6 @@
             businessLabel: 'Business name',
             emailLabel: 'Email',
             commentLabel: 'Comment',
-            optional: '(optional)',
             footerNote: 'No spam. No pressure.',
             submitText: 'Send',
             sending: 'Sending…',
@@ -676,15 +633,14 @@
             titlePrefix: 'אני עושה',
             rotateWords: ['צילום', 'עריכה', 'הכל ביחד'],
             whatsapp: 'וואטסאפ',
-            formHeading: 'התחלת פרויקט',
+            formHeading: 'בואו נתחיל',
             phoneLabel: 'טלפון',
-            phoneHint: 'מספיק להשאיר מספר טלפון — אבל מוזמנים לשתף עוד קצת.',
+            phoneHint: 'מספיק להשאיר רק מספר טלפון - אבל מוזמנים לשתף עוד קצת.',
             toggleText: 'הוספת פרטים',
             nameLabel: 'שם',
             businessLabel: 'שם העסק',
             emailLabel: 'אימייל',
             commentLabel: 'הערה',
-            optional: '(אופציונלי)',
             footerNote: 'בלי ספאם. בלי לחץ.',
             submitText: 'שליחה',
             sending: '...שולח',
@@ -696,10 +652,8 @@
             madeBy: 'נבנה על ידי Atar'
         }
     };
-
     let currentLang = 'en';
     let rotateInterval = null;
-
     function startRotator() {
         if (rotateInterval) clearInterval(rotateInterval);
         const el = document.getElementById('rotator');
@@ -716,43 +670,34 @@
             }, 400);
         }, 2200);
     }
-
     function setLang(lang) {
         currentLang = lang;
         const t = translations[lang];
         document.body.classList.toggle('rtl', t.dir === 'rtl');
         document.documentElement.lang = lang;
-
         document.getElementById('t-logo').textContent = t.logo;
         document.getElementById('nav-whatsapp').innerHTML = t.whatsapp + ' <span class="arrow">↗</span>';
         document.getElementById('t-tag').textContent = t.tag;
         document.getElementById('t-title-prefix').textContent = t.titlePrefix;
-
         document.getElementById('t-form-heading').textContent = t.formHeading;
         document.getElementById('t-phone-label').textContent = t.phoneLabel;
         document.getElementById('t-phone-hint').textContent = t.phoneHint;
         document.getElementById('t-toggle-text').textContent = t.toggleText;
-
-        document.getElementById('t-name-label').innerHTML = t.nameLabel + ' <span class="optional">' + t.optional + '</span>';
-        document.getElementById('t-business-label').innerHTML = t.businessLabel + ' <span class="optional">' + t.optional + '</span>';
-        document.getElementById('t-email-label').innerHTML = t.emailLabel + ' <span class="optional">' + t.optional + '</span>';
-        document.getElementById('t-comment-label').innerHTML = t.commentLabel + ' <span class="optional">' + t.optional + '</span>';
-
+        document.getElementById('t-name-label').textContent = t.nameLabel;
+        document.getElementById('t-business-label').textContent = t.businessLabel;
+        document.getElementById('t-email-label').textContent = t.emailLabel;
+        document.getElementById('t-comment-label').textContent = t.commentLabel;
         document.getElementById('t-footer-note').textContent = t.footerNote;
         document.getElementById('t-submit-text').textContent = t.submitText;
-
         document.getElementById('t-success-title').textContent = t.successTitle;
         document.getElementById('t-success-text').innerHTML = t.successText;
         document.getElementById('t-instagram').innerHTML = t.instagram + ' <span class="arrow">↗</span>';
         document.getElementById('t-made-by').innerHTML = t.madeBy + ' <span class="arrow">↗</span>';
-
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
         });
-
         startRotator();
     }
-
     /* ===== Optional dropdown ===== */
     const optionalToggle = document.getElementById('optionalToggle');
     const optionalContent = document.getElementById('optionalContent');
@@ -760,12 +705,10 @@
         const open = optionalContent.classList.toggle('open');
         this.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
     /* ===== Masked phone input ===== */
     const phoneInput = document.getElementById('phone');
     const phoneDisplay = document.getElementById('phoneMaskDisplay');
     const phoneWrap = document.getElementById('phoneMaskWrap');
-
     function renderPhoneMask() {
         const digits = phoneInput.value.replace(/\D/g, '').slice(0, 8);
         const slots = ['#','#','#','#','#','#','#','#'];
@@ -793,7 +736,6 @@
     });
     phoneWrap.addEventListener('click', () => phoneInput.focus());
     renderPhoneMask();
-
     /* ===== Init lang ===== */
     const urlLang = new URLSearchParams(window.location.search).get('lang');
     if (urlLang && translations[urlLang]) {
@@ -802,30 +744,25 @@
         const browserLang = navigator.language.slice(0, 2);
         setLang(browserLang === 'he' || browserLang === 'iw' ? 'he' : 'en');
     }
-
     /* ===== Submit ===== */
     const form = document.getElementById('orderForm');
     const submitBtn = document.getElementById('submitBtn');
     const submitText = document.getElementById('t-submit-text');
     const errorMsg = document.getElementById('errorMsg');
-
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         errorMsg.style.display = 'none';
-
         const t = translations[currentLang];
         const phoneDigits = phoneInput.value.trim();
         const name = document.getElementById('name').value.trim();
         const business = document.getElementById('business').value.trim();
         const email = document.getElementById('email').value.trim();
         const description = document.getElementById('description').value.trim();
-
         if (!/^\d{7,8}$/.test(phoneDigits)) {
             errorMsg.textContent = t.errorPhone;
             errorMsg.style.display = 'block';
             return;
         }
-
         const fullPhone = '05' + phoneDigits;
         const formData = {
             phone: fullPhone,
@@ -836,10 +773,8 @@
             language: currentLang,
             timestamp: new Date().toISOString()
         };
-
         submitBtn.disabled = true;
         submitText.textContent = t.sending;
-
         try {
             if (WEBHOOK_URL) {
                 const response = await fetch(WEBHOOK_URL, {
@@ -862,6 +797,5 @@
         }
     });
 </script>
-
 </body>
 </html>
