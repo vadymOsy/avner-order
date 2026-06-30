@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avner Assulin — Start Your Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --surface: #fafafa;
+            --white: #ffffff;
+            --black: #0a0a0a;
+            --ink: #111111;
+            --muted: #6b7280;
+            --gray: #9ca3af;
+            --border: #e5e7eb;
+            --border-soft: #eef0f4;
+            --red: #e8392b;
+            --red-hover: #d22e21;
+            --red-soft: #fdeceb;
+            --danger: #dc2626;
+            --radius-sm: 4px;
+            --radius: 6px;
+            --radius-lg: 10px;
+            --radius-pill: 6px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+        html, body { background: var(--bg); }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.rtl {
+            direction: rtl;
+            font-family: 'Noto Sans Hebrew', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        /* ===== NAV ===== */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 40px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-soft);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.85);
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+            background: var(--surface);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+            opacity: 0;
+            animation: slideInLeft 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+        }
+        body.rtl .nav-avatar { animation-name: slideInRight; }
+        .nav-avatar:hover { transform: scale(1.06); border-color: var(--red); }
+
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+        @media (prefers-reduced-motion: reduce) { .nav-avatar { animation: none; opacity: 1; } }
+
+        .nav-logo {
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Language switcher — flat, site-style */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            background: var(--white);
+            border: none;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            letter-spacing: 0.04em;
+        }
+        .lang-btn + .lang-btn { border-left: 1px solid var(--border); }
+        body.rtl .lang-btn + .lang-btn { border-left: none; border-right: 1px solid var(--border); }
+
+        .lang-btn.active {
+            background: var(--black);
+            color: var(--white);
+        }
+        .lang-btn:hover:not(.active) { color: var(--black); background: var(--surface); }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 72px 40px 40px;
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--red);
+            background: var(--red-soft);
+            padding: 6px 12px;
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.05s forwards;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+        }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 {
+            font-family: inherit;
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.2px;
+            color: var(--black);
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp 0.55s ease 0.12s forwards;
+        }
+
+        /* Word rotator — blur fade, premium minimal */
+        .rotator {
+            display: block;
+            color: var(--red);
+            margin-top: 4px;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity, transform, filter;
+            white-space: nowrap;
+        }
+        .rotator.swap {
+            opacity: 0;
+            transform: translateY(-8px);
+            filter: blur(8px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rotator { transition: none; }
+            .rotator.swap { opacity: 1; transform: none; filter: none; }
+        }
+
+        body.rtl h1 { font-size: 42px; letter-spacing: -1px; }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeUp 0.55s ease 0.2s forwards;
+        }
+
+        /* ===== FORM CARD ===== */
+        .form-card {
+            max-width: 720px;
+            margin: 36px auto 100px;
+            padding: 0 40px;
+            opacity: 0;
+            animation: fadeUp 0.55s ease 0.34s forwards;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 8px 32px rgba(15, 23, 42, 0.04);
+        }
+
+        .card-section {
+            padding: 32px 36px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .card-section:last-child { border-bottom: none; }
+
+        .card-section.optional-section {
+            background: var(--surface);
+        }
+
+        .section-header {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--red);
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .optional-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 12px 14px;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .optional-toggle:hover { border-color: var(--gray); background: var(--surface); }
+        .optional-toggle[aria-expanded="true"] {
+            border-color: var(--red);
+            background: var(--red-soft);
+            color: var(--red);
+        }
+        .toggle-chevron {
+            font-size: 12px;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            opacity: 0.7;
+        }
+        .optional-toggle[aria-expanded="true"] .toggle-chevron { transform: rotate(180deg); }
+
+        .optional-content {
+            display: none;
+            margin-top: 18px;
+        }
+        .optional-content.open { display: block; animation: fadeUp 0.3s ease both; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group:last-child { margin-bottom: 0; }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .required { color: var(--red); margin-left: 2px; font-weight: 700; }
+        body.rtl .required { margin-left: 0; margin-right: 2px; }
+        .optional { font-weight: 400; font-size: 11px; opacity: 0.6; letter-spacing: 0; text-transform: none; }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px 16px;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--ink);
+            outline: none;
+            transition: all 0.15s;
+            -webkit-appearance: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--red);
+            background: var(--white);
+            box-shadow: 0 0 0 4px var(--red-soft);
+        }
+
+        input::placeholder, textarea::placeholder { color: var(--gray); }
+        textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+
+        .hint {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Masked phone input — full 05X-XXX-XXXX inside a single grey field */
+        .phone-mask-wrap {
+            position: relative;
+            width: 100%;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            cursor: text;
+            transition: all 0.15s;
+            overflow: hidden;
+        }
+        .phone-mask-wrap:focus-within {
+            border-color: var(--red);
+            background: var(--white);
+            box-shadow: 0 0 0 4px var(--red-soft);
+        }
+        .phone-mask-display {
+            padding: 13px 16px;
+            font-size: 16px;
+            font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            color: var(--ink);
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            user-select: none;
+            pointer-events: none;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+        .phone-mask-display .filled { color: var(--ink); font-weight: 600; }
+        .phone-mask-display .placeholder { color: var(--gray); font-weight: 500; }
+        .phone-mask-display .separator { color: var(--gray); padding: 0 1px; }
+
+        /* the real input sits invisibly on top to capture keys */
+        .phone-input-real {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            padding: 13px 16px;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            color: transparent;
+            caret-color: var(--red);
+            font-size: 16px;
+            font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+            letter-spacing: 0.04em;
+            outline: none;
+            box-shadow: none !important;
+        }
+        .phone-input-real:focus { box-shadow: none !important; }
+        .phone-input-real::selection { background: transparent; }
+
+        /* ===== Footer / Submit ===== */
+        .card-footer {
+            padding: 28px 36px;
+            background: var(--surface);
+            border-top: 1px solid var(--border-soft);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            flex-shrink: 0;
+            padding: 14px 28px;
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(232, 57, 43, 0.2), 0 4px 12px rgba(232, 57, 43, 0.15);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--red-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(232, 57, 43, 0.25), 0 8px 20px rgba(232, 57, 43, 0.2);
+        }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .error-msg {
+            display: none;
+            padding: 14px 36px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--danger);
+            background: #fef2f2;
+            border-top: 1px solid #fecaca;
+        }
+
+        /* ===== Success ===== */
+        .success-screen {
+            display: none;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .success-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 72px 40px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 8px 32px rgba(15, 23, 42, 0.04);
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            color: var(--white);
+            font-size: 28px;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(232, 57, 43, 0.3);
+        }
+
+        .success-card h2 {
+            font-family: inherit;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+            color: var(--black);
+        }
+        .success-card p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+        footer.site-footer {
+            border-top: 1px solid var(--border-soft);
+            padding: 22px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        footer.site-footer a { color: var(--muted); text-decoration: none; }
+        footer.site-footer a:hover { color: var(--black); }
+
+        /* ===== Mobile ===== */
+        @media (max-width: 600px) {
+            nav { padding: 14px 20px; }
+            .hero { padding: 48px 20px 32px; }
+            h1 { font-size: 30px; letter-spacing: -0.6px; }
+            body.rtl h1 { font-size: 28px; letter-spacing: -0.4px; }
+            .hero p { font-size: 15px; }
+            .form-card { padding: 0 16px; }
+            .card-section { padding: 24px 20px; }
+            .card-footer { flex-direction: column; align-items: stretch; padding: 24px 20px; }
+            .submit-btn { text-align: center; }
+            .success-screen { padding: 20px; }
+            .success-card { padding: 48px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <img src="avner.jpg" alt="Avner Assulin" class="nav-avatar" id="navAvatar">
+        <a href="#" class="nav-logo" id="t-logo">Avner Assulin</a>
+    </div>
+    <div class="nav-right">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('he')">HE</button>
+        </div>
+    </div>
+</nav>
+
+<div id="formWrapper">
+    <div class="hero">
+        <span class="hero-tag" id="t-tag">New Project</span>
+        <h1 id="t-title">I do <span class="rotator" id="rotator">filming</span></h1>
+        <p id="t-subtitle">For your business. Leave your number and I'll get back to you.</p>
+    </div>
+
+    <div class="form-card">
+        <form id="orderForm">
+            <div class="card">
+
+                <div class="card-section">
+                    <div class="section-header"><span class="num">1</span><span id="t-phone-header">Phone number</span></div>
+                    <div class="form-group">
+                        <label id="t-phone-label">Phone <span class="required">*</span></label>
+                        <div class="phone-mask-wrap" id="phoneMaskWrap">
+                            <div class="phone-mask-display" id="phoneMaskDisplay" aria-hidden="true"></div>
+                            <input type="tel" id="phone" class="phone-input-real" inputmode="numeric" autocomplete="tel-national" required>
+                        </div>
+                        <p class="hint" id="t-phone-hint">Phone number is enough — but it would be great to hear a bit more about you below.</p>
+                    </div>
+                </div>
+
+                <div class="card-section optional-section">
+                    <button type="button" class="optional-toggle" id="optionalToggle" aria-expanded="false">
+                        <span class="toggle-text" id="t-recommend-line">Add more details (optional)</span>
+                        <span class="toggle-chevron" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="optional-content" id="optionalContent">
+                        <div class="form-group">
+                            <label id="t-name-label">Name <span class="optional">(optional)</span></label>
+                            <input type="text" id="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="t-business-label">Business name <span class="optional">(optional)</span></label>
+                            <input type="text" id="business">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="t-email-label">Email <span class="optional">(optional)</span></label>
+                            <input type="email" id="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label id="t-comment-label">Comment <span class="optional">(optional)</span></label>
+                            <textarea id="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <p class="footer-note" id="t-footer-note">I respond as soon as I can.<br>No spam, no pressure.</p>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send →</button>
+                </div>
+
+                <div class="error-msg" id="errorMsg"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="success-screen" id="successScreen">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h2 id="t-success-title">Request received.</h2>
+        <p id="t-success-text">Thanks! I'll review your details<br>and reach out as soon as I can.</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <a href="#" id="t-instagram">Instagram ↗</a>
+</footer>
+
+<script>
+    /*
+     * Integration placeholder.
+     * To connect to n8n / Telegram later, set WEBHOOK_URL below
+     * and the form submit handler will POST formData to it.
+     * Currently disabled (no live endpoint) — submissions are
+     * simulated locally so the form is fully testable.
+     */
+    const WEBHOOK_URL = ''; // e.g. 'https://your-n8n-instance.app.n8n.cloud/webhook/avner-contact'
+
+    const translations = {
+        en: {
+            dir: 'ltr',
+            logo: 'Avner Assulin',
+            tag: 'New Project',
+            rotateWords: ['filming', 'editing', 'all of it together'],
+            subtitle: "For your business. Leave your number and I'll get back to you.",
+            phoneHeader: 'Phone number',
+            phoneLabel: 'Phone',
+            phoneHint: "Phone number is enough — but it would be great to hear a bit more about you below.",
+            recommendLine: 'Add more details (optional)',
+            nameLabel: 'Name',
+            businessLabel: 'Business name',
+            emailLabel: 'Email',
+            commentLabel: 'Comment',
+            optional: '(optional)',
+            footerNote: 'I respond as soon as I can.<br>No spam, no pressure.',
+            submitBtn: 'Send →',
+            sending: 'Sending...',
+            errorPhone: 'Please enter a valid phone number (05XXXXXXXX).',
+            errorGeneral: 'Something went wrong. Please try again or message directly.',
+            successTitle: 'Request received.',
+            successText: "Thanks! I'll review your details<br>and reach out as soon as I can.",
+            instagram: 'Instagram ↗'
+        },
+        he: {
+            dir: 'rtl',
+            logo: 'אבנר אסולין',
+            tag: 'פרויקט חדש',
+            rotateWords: ['צילום', 'עריכה', 'הכל ביחד'],
+            subtitle: 'לעסק שלכם. השאירו מספר ואחזור אליכם.',
+            phoneHeader: 'מספר טלפון',
+            phoneLabel: 'טלפון',
+            phoneHint: 'מספיק להשאיר מספר טלפון — אבל יהיה נחמד לשמוע עוד קצת עליכם למטה.',
+            recommendLine: 'הוספת פרטים נוספים (אופציונלי)',
+            nameLabel: 'שם',
+            businessLabel: 'שם העסק',
+            emailLabel: 'אימייל',
+            commentLabel: 'הערה',
+            optional: '(אופציונלי)',
+            footerNote: 'אני מגיב בהקדם האפשרי.<br>בלי ספאם.',
+            submitBtn: '← שליחה',
+            sending: '...שולח',
+            errorPhone: 'נא להזין מספר טלפון תקין (05XXXXXXXX).',
+            errorGeneral: 'משהו השתבש. נסו שוב או כתבו ישירות.',
+            successTitle: 'הבקשה התקבלה.',
+            successText: 'תודה! אעבור על הפרטים שלכם<br>ואחזור אליכם בהקדם.',
+            instagram: '← אינסטגרם'
+        }
+    };
+
+    let currentLang = 'en';
+    let rotateInterval = null;
+
+    function startRotator() {
+        if (rotateInterval) clearInterval(rotateInterval);
+        const el = document.getElementById('rotator');
+        if (!el) return;
+        const words = translations[currentLang].rotateWords;
+        if (!words || words.length === 0) return;
+        let i = 0;
+        el.textContent = words[0];
+
+        rotateInterval = setInterval(() => {
+            el.classList.add('swap');
+            setTimeout(() => {
+                i = (i + 1) % words.length;
+                el.textContent = words[i];
+                el.classList.remove('swap');
+            }, 400);
+        }, 2200);
+    }
+
+    function setLang(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+
+        document.body.classList.toggle('rtl', t.dir === 'rtl');
+        document.documentElement.lang = lang;
+
+        document.getElementById('t-logo').textContent = t.logo;
+        document.getElementById('t-tag').textContent = t.tag;
+        document.getElementById('t-subtitle').textContent = t.subtitle;
+
+        document.getElementById('t-phone-header').textContent = t.phoneHeader;
+        document.getElementById('t-phone-label').innerHTML = t.phoneLabel + ' <span class="required">*</span>';
+        document.getElementById('t-phone-hint').textContent = t.phoneHint;
+        document.getElementById('t-recommend-line').textContent = t.recommendLine;
+
+        document.getElementById('t-name-label').innerHTML = t.nameLabel + ' <span class="optional">' + t.optional + '</span>';
+        document.getElementById('t-business-label').innerHTML = t.businessLabel + ' <span class="optional">' + t.optional + '</span>';
+        document.getElementById('t-email-label').innerHTML = t.emailLabel + ' <span class="optional">' + t.optional + '</span>';
+        document.getElementById('t-comment-label').innerHTML = t.commentLabel + ' <span class="optional">' + t.optional + '</span>';
+
+        document.getElementById('t-footer-note').innerHTML = t.footerNote;
+        document.getElementById('submitBtn').textContent = t.submitBtn;
+
+        document.getElementById('t-success-title').textContent = t.successTitle;
+        document.getElementById('t-success-text').innerHTML = t.successText;
+        document.getElementById('t-instagram').textContent = t.instagram;
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+        });
+
+        startRotator();
+    }
+
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang && translations[urlLang]) {
+        setLang(urlLang);
+    } else {
+        const browserLang = navigator.language.slice(0, 2);
+        setLang(browserLang === 'he' || browserLang === 'iw' ? 'he' : 'en');
+    }
+
+    const form = document.getElementById('orderForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    /* ===== Optional fields dropdown ===== */
+    const optionalToggle = document.getElementById('optionalToggle');
+    const optionalContent = document.getElementById('optionalContent');
+    optionalToggle.addEventListener('click', function () {
+        const open = optionalContent.classList.toggle('open');
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    /* ===== Masked phone input ===== */
+    const phoneInput = document.getElementById('phone');
+    const phoneDisplay = document.getElementById('phoneMaskDisplay');
+    const phoneWrap = document.getElementById('phoneMaskWrap');
+
+    // Mask format: 05X-XXX-XXXX → user enters up to 8 digits (after the forced "05" prefix)
+    // We store ONLY the user-entered digits in the real input (without 05, separators).
+    function renderPhoneMask() {
+        const digits = phoneInput.value.replace(/\D/g, '').slice(0, 8);
+        // Build 8 slots
+        const slots = ['#','#','#','#','#','#','#','#'];
+        for (let i = 0; i < digits.length; i++) slots[i] = digits[i];
+
+        const span = (ch) => ch === '#'
+            ? `<span class="placeholder">#</span>`
+            : `<span class="filled">${ch}</span>`;
+
+        let html = '<span class="filled">05</span>';
+        html += span(slots[0]);                                 // X
+        html += '<span class="separator">-</span>';
+        html += span(slots[1]) + span(slots[2]) + span(slots[3]); // XXX
+        html += '<span class="separator">-</span>';
+        html += span(slots[4]) + span(slots[5]) + span(slots[6]) + span(slots[7]); // XXXX
+        phoneDisplay.innerHTML = html;
+    }
+
+    phoneInput.addEventListener('input', function () {
+        // strip non-digits, cap at 8
+        this.value = this.value.replace(/\D/g, '').slice(0, 8);
+        renderPhoneMask();
+        // keep caret at end so it visually tracks the next # to fill
+        const len = this.value.length;
+        this.setSelectionRange(len, len);
+    });
+    phoneInput.addEventListener('focus', function () {
+        const len = this.value.length;
+        this.setSelectionRange(len, len);
+    });
+    phoneWrap.addEventListener('click', function () { phoneInput.focus(); });
+
+    renderPhoneMask();
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorMsg.style.display = 'none';
+
+        const t = translations[currentLang];
+        const phoneDigits = phoneInput.value.trim();
+        const name = document.getElementById('name').value.trim();
+        const business = document.getElementById('business').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const description = document.getElementById('description').value.trim();
+
+        if (!/^\d{7,8}$/.test(phoneDigits)) {
+            errorMsg.textContent = t.errorPhone;
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        const fullPhone = '05' + phoneDigits;
+
+        const formData = {
+            phone: fullPhone,
+            name: name || null,
+            business: business || null,
+            email: email || null,
+            description: description || null,
+            language: currentLang,
+            timestamp: new Date().toISOString()
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = t.sending;
+
+        try {
+            if (WEBHOOK_URL) {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                if (!response.ok) throw new Error('Server error');
+            } else {
+                await new Promise(res => setTimeout(res, 500));
+                console.log('Form data (webhook not configured):', formData);
+            }
+
+            document.getElementById('formWrapper').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+        } catch (err) {
+            errorMsg.textContent = t.errorGeneral;
+            errorMsg.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = t.submitBtn;
+        }
+    });
+</script>
+
+</body>
+</html>
