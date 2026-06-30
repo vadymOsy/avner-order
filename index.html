@@ -16,9 +16,9 @@
             --gray: #9ca3af;
             --border: #e5e7eb;
             --border-soft: #eef0f4;
-            --red: #e8392b;
-            --red-hover: #d22e21;
-            --red-soft: #fdeceb;
+            --red: #ed1c24;
+            --red-hover: #c8141b;
+            --red-soft: #fde5e6;
             --danger: #dc2626;
             --radius-sm: 4px;
             --radius: 6px;
@@ -65,8 +65,8 @@
         .nav-left { display: flex; align-items: center; gap: 12px; }
 
         .nav-avatar {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid var(--border);
@@ -74,20 +74,29 @@
             background: var(--surface);
             transition: transform 0.25s ease, border-color 0.25s ease;
             opacity: 0;
-            animation: slideInLeft 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+            animation: slideInLeft 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
         }
         body.rtl .nav-avatar { animation-name: slideInRight; }
         .nav-avatar:hover { transform: scale(1.06); border-color: var(--red); }
 
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-40px); filter: blur(4px); }
+            60% { opacity: 0.6; filter: blur(1px); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(40px); filter: blur(4px); }
+            60% { opacity: 0.6; filter: blur(1px); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
         @media (prefers-reduced-motion: reduce) { .nav-avatar { animation: none; opacity: 1; } }
 
         .nav-logo {
             font-family: inherit;
             font-weight: 700;
-            font-size: 16px;
-            letter-spacing: -0.2px;
+            font-size: 15px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             color: var(--black);
             text-decoration: none;
         }
@@ -111,13 +120,14 @@
             background: var(--white);
             border: none;
             padding: 6px 12px;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             font-family: inherit;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--muted);
             cursor: pointer;
             transition: all 0.15s;
-            letter-spacing: 0.04em;
         }
         .lang-btn + .lang-btn { border-left: 1px solid var(--border); }
         body.rtl .lang-btn + .lang-btn { border-left: none; border-right: 1px solid var(--border); }
@@ -142,7 +152,8 @@
             gap: 8px;
             font-size: 12px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--red);
             background: var(--red-soft);
             padding: 6px 12px;
@@ -167,9 +178,10 @@
             font-size: 44px;
             font-weight: 800;
             line-height: 1.15;
-            letter-spacing: -1.2px;
+            letter-spacing: -0.5px;
             color: var(--black);
             margin-bottom: 18px;
+            text-transform: uppercase;
             opacity: 0;
             animation: fadeUp 0.55s ease 0.12s forwards;
         }
@@ -179,6 +191,7 @@
             display: block;
             color: var(--red);
             margin-top: 4px;
+            text-transform: uppercase;
             transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                         transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                         filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -231,7 +244,9 @@
         .card-section:last-child { border-bottom: none; }
 
         .card-section.optional-section {
-            background: var(--surface);
+            background: var(--white);
+            padding-top: 20px;
+            padding-bottom: 24px;
         }
 
         .section-header {
@@ -261,49 +276,51 @@
         }
 
         .optional-toggle {
-            width: 100%;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
             gap: 8px;
-            padding: 12px 14px;
+            padding: 8px 16px;
             background: var(--white);
-            border: 1.5px solid var(--border);
+            border: 1.5px solid var(--red);
             border-radius: var(--radius);
             font-family: inherit;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--ink);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--red);
             cursor: pointer;
             transition: all 0.15s;
         }
-        .optional-toggle:hover { border-color: var(--gray); background: var(--surface); }
+        .optional-toggle:hover { background: var(--red-soft); }
         .optional-toggle[aria-expanded="true"] {
-            border-color: var(--red);
-            background: var(--red-soft);
-            color: var(--red);
+            background: var(--red);
+            color: var(--white);
         }
+
         .toggle-chevron {
-            font-size: 12px;
+            font-size: 10px;
             line-height: 1;
-            transition: transform 0.2s ease;
-            opacity: 0.7;
+            transition: transform 0.25s ease;
+            margin-top: 1px;
         }
         .optional-toggle[aria-expanded="true"] .toggle-chevron { transform: rotate(180deg); }
 
         .optional-content {
             display: none;
-            margin-top: 18px;
+            margin-top: 20px;
         }
-        .optional-content.open { display: block; animation: fadeUp 0.3s ease both; }
+        .optional-content.open { display: block; animation: fadeUp 0.35s ease both; }
 
         .form-group { margin-bottom: 16px; }
         .form-group:last-child { margin-bottom: 0; }
 
         label {
             display: block;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             color: var(--ink);
             margin-bottom: 8px;
         }
@@ -422,19 +439,21 @@
             color: var(--white);
             border: none;
             border-radius: var(--radius);
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.15s;
             white-space: nowrap;
-            box-shadow: 0 1px 2px rgba(232, 57, 43, 0.2), 0 4px 12px rgba(232, 57, 43, 0.15);
+            box-shadow: 0 1px 2px rgba(237, 28, 36, 0.2), 0 4px 12px rgba(237, 28, 36, 0.15);
         }
 
         .submit-btn:hover:not(:disabled) {
             background: var(--red-hover);
             transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(232, 57, 43, 0.25), 0 8px 20px rgba(232, 57, 43, 0.2);
+            box-shadow: 0 2px 4px rgba(237, 28, 36, 0.25), 0 8px 20px rgba(237, 28, 36, 0.2);
         }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -477,14 +496,15 @@
             color: var(--white);
             font-size: 28px;
             font-weight: 700;
-            box-shadow: 0 4px 16px rgba(232, 57, 43, 0.3);
+            box-shadow: 0 4px 16px rgba(237, 28, 36, 0.3);
         }
 
         .success-card h2 {
             font-family: inherit;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -0.4px;
+            text-transform: uppercase;
             margin-bottom: 14px;
             color: var(--black);
         }
