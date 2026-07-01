@@ -363,7 +363,7 @@
             margin-top: 36px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
         .footer-note {
             font-size: 11px;
@@ -371,8 +371,8 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--muted);
-            line-height: 1.6;
         }
+        body.rtl .footer-note { font-size: 14px; }
         .submit-btn {
             width: 100%;
             padding: 20px 28px;
@@ -390,10 +390,7 @@
             align-items: center;
             justify-content: space-between;
         }
-        .submit-btn .arrow {
-            font-size: 18px;
-            display: inline-block;
-        }
+        .submit-btn .arrow { font-size: 18px; }
         body.rtl .submit-btn .arrow { transform: scaleX(-1); }
         .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .error-msg {
@@ -506,7 +503,6 @@
         body.rtl label { font-size: 15px; }
         body.rtl .optional-toggle { font-size: 15px; }
         body.rtl .hint { font-size: 15px; }
-        body.rtl .footer-note { font-size: 14px; }
         body.rtl .submit-btn { font-size: 18px; }
         body.rtl .form-heading h2 { font-size: clamp(32px, 4.6vw, 50px); }
         body.rtl footer.site-footer { font-size: 15px; }
@@ -575,7 +571,6 @@
                 </div>
             </div>
             <div class="submit-row">
-                <p class="footer-note" id="t-footer-note">No spam. No pressure.</p>
                 <button type="submit" class="submit-btn" id="submitBtn">
                     <span id="t-submit-text">Send</span>
                     <span class="arrow">→</span>
@@ -616,7 +611,6 @@
             businessLabel: 'Business name',
             emailLabel: 'Email',
             commentLabel: 'Comment',
-            footerNote: 'No spam. No pressure.',
             submitText: 'Send',
             sending: 'Sending…',
             errorPhone: 'Please enter a valid phone number (05XXXXXXXX).',
@@ -643,7 +637,6 @@
             businessLabel: 'שם העסק',
             emailLabel: 'אימייל',
             commentLabel: 'הערה',
-            footerNote: 'בלי ספאם. בלי לחץ.',
             submitText: 'שליחה',
             sending: '...שולח',
             errorPhone: 'נא להזין מספר טלפון תקין (05XXXXXXXX).',
@@ -691,7 +684,6 @@
         document.getElementById('t-business-label').textContent = t.businessLabel;
         document.getElementById('t-email-label').textContent = t.emailLabel;
         document.getElementById('t-comment-label').textContent = t.commentLabel;
-        document.getElementById('t-footer-note').textContent = t.footerNote;
         document.getElementById('t-submit-text').textContent = t.submitText;
         document.getElementById('t-success-tag').textContent = t.successTag;
         document.getElementById('t-success-title').innerHTML = t.successTitle;
