@@ -413,42 +413,55 @@
         /* ===== Success ===== */
         .success-screen {
             display: none;
-            max-width: 720px;
-            margin: 80px auto;
             padding: 0 40px;
+            max-width: 1400px;
+            margin: 16px auto 0;
         }
         .success-card {
-            border: 2px solid var(--ink);
-            border-radius: 4px;
-            padding: 80px 40px;
-            text-align: center;
-        }
-        .success-icon {
-            width: 56px;
-            height: 56px;
             background: var(--red);
-            border-radius: 50%;
+            border-radius: 4px;
+            padding: 28px 40px 52px;
             display: flex;
+            flex-direction: column;
+        }
+        .success-tag {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 28px;
-            color: #ffffff;
-            font-size: 26px;
-            font-weight: 800;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            width: fit-content;
+            margin-bottom: 40px;
+        }
+        .success-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
         }
         .success-card h2 {
-            font-size: 32px;
+            font-size: clamp(48px, 6.2vw, 84px);
             font-weight: 900;
-            letter-spacing: -0.01em;
+            line-height: 0.92;
+            letter-spacing: -0.02em;
             text-transform: uppercase;
-            margin-bottom: 14px;
+            color: #ffffff;
+            margin-bottom: 0;
         }
         .success-card p {
-            font-size: 14px;
-            color: var(--muted);
-            line-height: 1.7;
+            margin-top: 40px;
+            font-size: 15px;
+            font-style: italic;
             font-weight: 500;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.45;
         }
+        body.rtl .success-card p { font-style: normal; }
+        body.rtl .success-card h2 { font-size: clamp(56px, 7.2vw, 96px); }
         /* ===== Footer ===== */
         footer.site-footer {
             border-top: 1px solid var(--border-soft);
@@ -481,8 +494,8 @@
             .hero-red { min-height: 300px; padding: 32px 24px; gap: 22px; }
             .form-section { padding: 48px 20px 80px; margin-top: 36px; }
             .form-heading { margin-bottom: 28px; }
-            .success-screen { padding: 0 20px; margin: 48px auto; }
-            .success-card { padding: 56px 28px; }
+            .success-screen { padding: 0 20px; margin-top: 8px; }
+            .success-card { padding: 32px 24px 44px; }
             footer.site-footer { padding: 22px 20px; gap: 24px; }
         }
         /* ===== Hebrew type bump — Noto Sans Hebrew reads smaller at equal px ===== */
@@ -496,8 +509,6 @@
         body.rtl .footer-note { font-size: 14px; }
         body.rtl .submit-btn { font-size: 18px; }
         body.rtl .form-heading h2 { font-size: clamp(32px, 4.6vw, 50px); }
-        body.rtl .success-card h2 { font-size: 36px; }
-        body.rtl .success-card p { font-size: 17px; }
         body.rtl footer.site-footer { font-size: 15px; }
         body.rtl .nav-logo { font-size: 19px; }
     </style>
@@ -576,9 +587,9 @@
 </div>
 <div class="success-screen" id="successScreen">
     <div class="success-card">
-        <div class="success-icon">✓</div>
-        <h2 id="t-success-title">Request received</h2>
-        <p id="t-success-text">Thanks. I'll review your details<br>and reach out as soon as I can.</p>
+        <span class="success-tag" id="t-success-tag">Request received</span>
+        <h2 id="t-success-title">Got it.<br>I'll be in touch.</h2>
+        <p id="t-success-text">I'll review your details and reach out as soon as I can.</p>
     </div>
 </div>
 <footer class="site-footer">
@@ -610,8 +621,9 @@
             sending: 'Sending…',
             errorPhone: 'Please enter a valid phone number (05XXXXXXXX).',
             errorGeneral: 'Something went wrong. Please try again or message directly.',
-            successTitle: 'Request received',
-            successText: "Thanks. I'll review your details<br>and reach out as soon as I can.",
+            successTag: 'Request received',
+            successTitle: "Got it.<br>I'll be in touch.",
+            successText: 'I\'ll review your details and reach out as soon as I can.',
             instagram: 'Instagram',
             madeBy: 'Made by Atar'
         },
@@ -636,8 +648,9 @@
             sending: '...שולח',
             errorPhone: 'נא להזין מספר טלפון תקין (05XXXXXXXX).',
             errorGeneral: 'משהו השתבש. נסו שוב או כתבו ישירות.',
-            successTitle: 'הבקשה התקבלה',
-            successText: 'תודה. אעבור על הפרטים שלכם<br>ואחזור אליכם בהקדם.',
+            successTag: 'הבקשה התקבלה',
+            successTitle: 'קיבלתי.<br>אחזור אליכם.',
+            successText: 'אעבור על הפרטים שלכם ואחזור אליכם בהקדם.',
             instagram: 'אינסטגרם',
             madeBy: 'נבנה על ידי Atar'
         }
@@ -680,8 +693,9 @@
         document.getElementById('t-comment-label').textContent = t.commentLabel;
         document.getElementById('t-footer-note').textContent = t.footerNote;
         document.getElementById('t-submit-text').textContent = t.submitText;
-        document.getElementById('t-success-title').textContent = t.successTitle;
-        document.getElementById('t-success-text').innerHTML = t.successText;
+        document.getElementById('t-success-tag').textContent = t.successTag;
+        document.getElementById('t-success-title').innerHTML = t.successTitle;
+        document.getElementById('t-success-text').textContent = t.successText;
         document.getElementById('t-instagram').innerHTML = t.instagram + ' <span class="arrow">↗</span>';
         document.getElementById('t-made-by').innerHTML = t.madeBy + ' <span class="arrow">↗</span>';
         document.querySelectorAll('.lang-btn').forEach(btn => {
