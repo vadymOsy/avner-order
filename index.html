@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avner Assulin — Get in touch</title>
+    <title>Avner Assulin - Get in touch</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Hebrew:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -382,7 +382,7 @@
        2. Enter your email → click "Create Access Key"
        3. Confirm your email in the inbox
        4. Paste your key below                        */
-    const WEB3FORMS_KEY = 'a0927530-7428-4976-a60a-61ad739b01d2';
+    const WEB3FORMS_KEY = 'PASTE_YOUR_KEY_HERE';
 
     const translations = {
         en: {
@@ -574,15 +574,15 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     access_key: WEB3FORMS_KEY,
-                    subject: '🎬 New project request — Avner Assulin',
+                    subject: 'צלמאן! קיבלת בקשה חדשה',
                     from_name: name || fullPhone,
-                    phone: fullPhone,
-                    name: name || '—',
-                    business: business || '—',
-                    email: email || '—',
-                    comment: description || '—',
-                    language: currentLang,
-                    timestamp: new Date().toISOString()
+                    'טלפון': fullPhone,
+                    'שם': name || '—',
+                    'שם העסק': business || '—',
+                    'אימייל': email || '—',
+                    'הערה': description || '—',
+                    'שפה': currentLang === 'he' ? 'עברית' : 'אנגלית',
+                    'תאריך': new Date().toLocaleString('he-IL')
                 })
             });
 
